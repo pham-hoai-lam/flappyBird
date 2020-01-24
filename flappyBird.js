@@ -19,6 +19,14 @@ pipeSouth.src = "images/pipeSouth.png";
 var gap = 330;
 var cons = pipeNorth.height + gap;
 
+var bX = 10, bY = 150;
+var gravity = 1;
+
+document.addEventListener("keydown", moveUp);
+
+function moveUp() {
+    bY -= 20;
+}
 
 function draw() {
 
@@ -26,8 +34,8 @@ function draw() {
     ctx.drawImage(pipeNorth, 120, 0);
     ctx.drawImage(pipeSouth, 120, 0 + cons);
     ctx.drawImage(fg, 0, cvs.height - fg.height);
-    ctx.drawImage(bird, 10, 150);
-
+    ctx.drawImage(bird, bX, bY);
+    bY += gravity;
 
     requestAnimationFrame(draw);
 }
