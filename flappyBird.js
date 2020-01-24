@@ -40,6 +40,13 @@ function draw() {
         ctx.drawImage(pipeNorth, pipe[i].x, pipe[i].y);
         ctx.drawImage(pipeSouth, pipe[i].x, pipe[i].y + cons);
         pipe[i].x--;
+
+        if (pipe[i].x == 80) {
+            pipe.push({
+                x: cvs.width,
+                y: Math.floor(Math.random()*pipeNorth.height)-pipeNorth.height
+            });
+        }
     }
 
     ctx.drawImage(fg, 0, cvs.height - fg.height);
