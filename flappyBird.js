@@ -1,8 +1,6 @@
 var cvs = document.getElementById("canvas");
 var ctx = cvs.getContext("2d");
 
-// load images
-
 var bird = new Image();
 var bg = new Image();
 var fg = new Image();
@@ -16,10 +14,15 @@ pipeNorth.src = "images/pipeNorth.png";
 pipeSouth.src = "images/pipeSouth.png";
 
 
+var fly = new Audio();
+var score_ = new Audio();
+fly.src = "sounds/fly.mp3";
+score_.src = "sounds/score.mp3";
+
 var gap = 350;
 var cons = pipeNorth.height + gap;
 
-var bX = 10, bY = 150;
+var bX = 20, bY = 150;
 var score = 0;
 var gravity = 1.25;
 
@@ -27,6 +30,7 @@ document.addEventListener("keydown", moveUp);
 
 function moveUp() {
     bY -= 25;
+    fly.play();
 }
 
 var pipe = [];
@@ -56,8 +60,9 @@ function draw() {
             location.reload();
         }
 
-        if (pipe[i].x == 5) {
+        if (pipe[i].x == bX - bird.width) {
             score++;
+            score_.play();
         }
     }
 
