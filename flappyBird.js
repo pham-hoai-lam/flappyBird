@@ -16,16 +16,16 @@ pipeNorth.src = "images/pipeNorth.png";
 pipeSouth.src = "images/pipeSouth.png";
 
 
-var gap = 330;
+var gap = 350;
 var cons = pipeNorth.height + gap;
 
 var bX = 10, bY = 150;
-var gravity = 1;
+var gravity = 1.5;
 
 document.addEventListener("keydown", moveUp);
 
 function moveUp() {
-    bY -= 20;
+    bY -= 25;
 }
 
 var pipe = [];
@@ -44,8 +44,16 @@ function draw() {
         if (pipe[i].x == 80) {
             pipe.push({
                 x: cvs.width,
-                y: Math.floor(Math.random()*pipeNorth.height)-pipeNorth.height
+                y: Math.floor(Math.random() * pipeNorth.height) - pipeNorth.height
             });
+        }
+
+        if (bX + bird.width >= pipe[i].x && bX <= pipe[i].x + pipeNorth.width
+            && (bY + bird.height >= pipe[i].y + cons || bY <= pipe[i].y + pipeNorth.height)
+            || bY + bird.height >= cvs.height - fg.height
+        ) {
+            location.reload();
+
         }
     }
 
