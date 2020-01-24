@@ -20,7 +20,8 @@ var gap = 350;
 var cons = pipeNorth.height + gap;
 
 var bX = 10, bY = 150;
-var gravity = 1.5;
+var score = 0;
+var gravity = 1.25;
 
 document.addEventListener("keydown", moveUp);
 
@@ -53,13 +54,19 @@ function draw() {
             || bY + bird.height >= cvs.height - fg.height
         ) {
             location.reload();
+        }
 
+        if (pipe[i].x == 5) {
+            score++;
         }
     }
 
     ctx.drawImage(fg, 0, cvs.height - fg.height);
     ctx.drawImage(bird, bX, bY);
     bY += gravity;
+    ctx.fillStyle = "#000";
+    ctx.font = "20px Verdana";
+    ctx.fillText("Score: " + score, 10, cvs.height - 20);
 
     requestAnimationFrame(draw);
 }
